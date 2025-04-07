@@ -1,12 +1,12 @@
-import Presenter from './presenter/main-presenter.js';
-import DestinationsModel from './model/destinations-model.js';
-import OffersModel from './model/offers-model.js';
-import PointsModel from './model/points-model.js';
+import Presenter from './presenter/main-presenter';
+import PointsModel from './model/points-model';
+import OffersModel from './model/offers-model';
+import DestinationsModel from './model/destinations-model';
 
-const destinationsModel = new DestinationsModel();
-const offersModel = new OffersModel();
 const pointsModel = new PointsModel();
+const offersModel = new OffersModel();
+const destinationsModel = new DestinationsModel();
 
-const presenter = new Presenter({destinationsModel, offersModel, pointsModel});
+const presenter = new Presenter({pointsModel, offersModel, destinationsModel});
 
 presenter.init();
