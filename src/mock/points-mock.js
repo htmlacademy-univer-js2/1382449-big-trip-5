@@ -1,68 +1,75 @@
-import { getRandomPrice } from '../utils.js';
+import { getRandomPrice } from '../utils';
 
 const minPrice = 240;
 const maxPrice = 4100;
 
 const pointsMock = [
   {
-    'id': '29843238-07fa-4913-aa6e-796c6c046231',
+    'id': '27dd5201-44e4-4787-aa22-6ac3a7ca8e81',
     'basePrice': getRandomPrice(minPrice, maxPrice),
-    'dateFrom': '2025-02-22T18:36:12.532Z',
-    'dateTo': '2025-02-24T16:08:12.532Z',
-    'destination': '725e1b1b-f856-494b-9214-fa56bdd65c56',
-    'isFavorite': true,
-    'offers': [
-      '33137e9d-1381-42d1-be7f-a1250a9c76a3',
-      '7365445f-214a-4ced-9d56-2d595045dfea',
-      'e145258c-df0e-4eeb-ba8b-7b76cb8290e4'
-    ],
-    'type': 'bus'
-  },
-  {
-    'id': '35e3754e-bd48-4b04-aa02-0703c5892593',
-    'basePrice': getRandomPrice(minPrice, maxPrice),
-    'dateFrom': '2025-02-26T04:58:12.532Z',
-    'dateTo': '2025-02-28T02:19:12.532Z',
-    'destination': '1270b8ec-7340-4a95-82b9-73e6fbb96b30',
-    'isFavorite': true,
-    'offers': [],
-    'type': 'taxi'
-  },
-  {
-    'id': '1cc7cf96-77af-4bf8-8a6f-47ff20ff3afd',
-    'basePrice': getRandomPrice(minPrice, maxPrice),
-    'dateFrom': '2025-03-01T13:57:12.532Z',
-    'dateTo': '2025-03-03T13:35:12.532Z',
-    'destination': '466eecd8-63ce-4f30-8d79-725e286f30b9',
+    'dateFrom': '2025-03-10T15:00:17.516Z',
+    'dateTo': '2025-03-11T17:44:17.516Z',
+    'destination': '28025513-9fa9-47db-8b93-78e0f32d84f1',
     'isFavorite': false,
     'offers': [
-      'a019a76f-cc37-46b0-9e33-439be462f4e4',
-      '24df243c-5f58-461c-9568-580f36fde0c8',
-      '8c511522-06b0-4653-a08e-ad2caacd6798',
-      'f451e1ce-e394-43e8-a5b5-dce2054091ec',
-      '82165fb5-18dd-4d78-b02c-e21a25d901b1'
+      'b7730c4f-9b4e-4c5f-ba93-3e186dca42e6',
+      '9bb07f8b-e82b-4738-8b5a-5c6bae30ad90',
+      '89cd5a4f-571c-410d-a4f2-1adb589dcdce',
+      '1fbc49c6-2e99-488b-95bd-87739f32c533',
+      '836e9bd6-d532-4867-b99a-cd339a57dc05'
     ],
-    'type': 'taxi'
+    'type': 'check-in'
   },
   {
-    'id': 'c632dc9d-157b-4ccd-af86-dacd87be2d8a',
+    'id': 'c8a64888-5919-471f-ad04-582058d937e8',
     'basePrice': getRandomPrice(minPrice, maxPrice),
-    'dateFrom': '2025-03-04T18:15:12.532Z',
-    'dateTo': '2025-03-05T14:59:12.532Z',
-    'destination': 'aa33234e-13a4-4add-b26c-21ba4b8205fe',
+    'dateFrom': '2025-04-13T02:00:17.516Z',
+    'dateTo': '2025-04-14T10:29:17.516Z',
+    'destination': '13b3f63e-494e-4736-93d6-eea350805f32',
     'isFavorite': false,
     'offers': [],
     'type': 'sightseeing'
   },
   {
-    'id': '2b01efdb-5c3a-4310-a065-8b834eafc335',
+    'id': '4a2f4727-4518-4f0d-ba31-be9b113c2c1b',
     'basePrice': getRandomPrice(minPrice, maxPrice),
-    'dateFrom': '2025-03-06T22:35:12.532Z',
-    'dateTo': '2025-03-08T07:34:12.532Z',
-    'destination': 'e05056ac-f5e8-413e-812e-186059ffa8b5',
+    'dateFrom': '2025-05-14T23:12:17.516Z',
+    'dateTo': '2025-05-15T10:49:17.516Z',
+    'destination': 'b029dbd0-e23d-40be-9aa2-97828f51b5bb',
+    'isFavorite': true,
+    'offers': [
+      '48f5964e-267d-4b41-804e-ffc531ebd023'
+    ],
+    'type': 'drive'
+  },
+  {
+    'id': '1159737c-4403-4ee7-bd1b-e40f38eb0005',
+    'basePrice': getRandomPrice(minPrice, maxPrice),
+    'dateFrom': '2025-06-15T17:25:17.516Z',
+    'dateTo': '2025-06-17T10:45:17.516Z',
+    'destination': '5ad946fb-2d23-46e9-af7e-d272c642aecf',
     'isFavorite': false,
-    'offers': [],
-    'type': 'bus'
+    'offers': [
+      '7c242e33-9390-4f28-84ed-bf352809944a',
+      '8fcead10-05f2-440a-9fb8-fd1b6389dc98',
+      'bf082dcc-2af6-470d-a049-26a746d244dd',
+      '9289150c-b8c2-44a0-bc44-94f5cd8e7894',
+      'bef15b9f-e8a2-409c-85ac-92bdaf461759'
+    ],
+    'type': 'ship'
+  },
+  {
+    'id': '127142a6-cfda-4b08-98df-e700684edada',
+    'basePrice': getRandomPrice(minPrice, maxPrice),
+    'dateFrom': '2025-07-18T03:18:17.516Z',
+    'dateTo': '2025-07-18T16:32:17.516Z',
+    'destination': 'b029dbd0-e23d-40be-9aa2-97828f51b5bb',
+    'isFavorite': false,
+    'offers': [
+      '4fb723a2-cf55-421a-b77b-b3317e2463ca',
+      '429b80d4-0961-4511-a8c8-689252e6efe0'
+    ],
+    'type': 'restaurant'
   }
 ];
 
