@@ -1,6 +1,6 @@
 import AbstractView from '../framework/view/abstract-view';
-import { SortTypes } from '../consts.js';
-import { sort, getRouteDates, getRoute, getRoutePrice } from '../utils.js';
+import { SortType, SortingBySection } from '../consts.js';
+import { getRouteDates, getRoute, getRoutePrice } from '../utils.js';
 
 function createTripInfoTemplate(points, destinations, offers) {
   const routeDates = getRouteDates(points);
@@ -10,11 +10,11 @@ function createTripInfoTemplate(points, destinations, offers) {
   return `<section class="trip-main__trip-info  trip-info">
             <div class="trip-info__main">
               <h1 class="trip-info__title">${route}</h1>
-              <p class="trip-info__dates">${routeDates[0]}&nbsp;&mdash;&nbsp;${routeDates[1]}</p>
+              <p class="trip-info__dates">${routeDates[0] !== '' ? `${routeDates[0]}&nbsp;&mdash;&nbsp;${routeDates[1]}` : ''}</p>
             </div>
-            <p class="trip-info__cost">
+            ${routePrice > 0 ? `<p class="trip-info__cost">
               Total: &euro;&nbsp;<span class="trip-info__cost-value">${routePrice}</span>
-            </p>
+            </p>` : ''}
           </section>`;
 }
 
@@ -25,7 +25,7 @@ export default class TripInfoView extends AbstractView {
   constructor({ pointsModel }) {
     super();
     this.#pointsModel = pointsModel;
-    this.#points = sort[SortTypes.DAY](pointsModel.points);
+    this.#points = SortingBySection[SortType.DAY](pointsModel.points);
   }
 
   get template() {
