@@ -60,15 +60,7 @@ export default class PointsModel extends Observable {
     }
   }
 
-  async deletePoint(updateType, update) {
-    try {
-      await this.#pointsApiService.deletePoint(update);
-      this.#points = this.#points.filter((item) => item.id !== update.id);
-      this._notify(updateType, update);
-    } catch {
-      throw new Error('Can\'t delete point');
-    }
-  }
+
 
   get loading() {
     return this.#isLoading;
