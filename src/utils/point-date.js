@@ -18,8 +18,8 @@ const duration = (dateFrom, dateTo) => {
   const end = dayjs(dateTo);
   const difference = end.diff(start, 'minute');
 
-  const days = Math.floor(difference / TOTAL_DAY_MINUTES_COUNT);
-  const restHours = Math.floor((difference - days * TOTAL_DAY_MINUTES_COUNT) / HOUR_MINUTES_COUNT);
+  const days = Math.trunc(difference / TOTAL_DAY_MINUTES_COUNT);
+  const restHours = Math.trunc((difference - days * TOTAL_DAY_MINUTES_COUNT) / HOUR_MINUTES_COUNT);
   const restMinutes = difference - (days * TOTAL_DAY_MINUTES_COUNT + restHours * HOUR_MINUTES_COUNT);
 
   const daysOutput = getDaysOutput(days);
@@ -34,6 +34,7 @@ const getTime = (date) => dayjs(date).format(TIME_FORMAT);
 const getDateTime = (date) => dayjs(date).format(DATE_TIME_FORMAT);
 
 const isPastPoint = (dateTo) => dayjs().diff(dateTo, 'minute') > 0;
+const isPresentPoint = (point) => dayjs().isAfter(point.dateFrom) && dayjs().isBefore(point.dateTo);
 const isFuturePoint = (dateFrom) => dayjs().diff(dateFrom, 'minute') <= 0;
 const isFuturePastPoint = (dateFrom, dateTo) => dayjs().diff(dateFrom, 'minute') > 0 && dayjs().diff(dateTo, 'minute') < 0;
 
@@ -52,4 +53,4 @@ const sorting = {
   [SortType.PRICE]: (points) => points.sort(sortPointsByPrice)
 };
 
-export { humanizePointDueDate, duration, getDate, getDateTime, getTime, isPastPoint, isFuturePoint, isFuturePastPoint, sorting };
+export { humanizePointDueDate, duration, getDate, getDateTime, getTime, isPastPoint, isFuturePoint, isFuturePastPoint, isPresentPoint, sorting };

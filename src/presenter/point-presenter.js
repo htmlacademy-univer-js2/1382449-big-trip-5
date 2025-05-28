@@ -44,7 +44,7 @@ export default class PointPresenter {
     this.#pointComponent = new RoutePointView(point, this.#destinations, this.#offers);
     this.#editingPointComponent = new EditingFormView({
       point: point,
-      destination: this.#destinations,
+      destinations: this.#destinations,
       offers: this.#offers,
       isNewPoint: false
     });
@@ -115,7 +115,7 @@ export default class PointPresenter {
 
     this.#editingPointComponent.shake(resetAddFormState);
   }
- 
+
   #replacePreviewPointToEditingPoint = () => {
     replace(this.#editingPointComponent, this.#pointComponent);
     document.addEventListener('keydown', this.#escKeyDownHandler);

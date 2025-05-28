@@ -2,7 +2,6 @@ import EditingFormView from '../view/editing-form-view.js';
 import { render, remove, RenderPosition } from '../framework/render.js';
 import { isEscape } from '../utils/comon.js';
 import { UserAction, UpdateType } from '../const.js';
-import { nanoid } from 'nanoid';
 
 export default class PointNewPresenter {
   #pointListContainer = null;
@@ -34,7 +33,7 @@ export default class PointNewPresenter {
     this.#offers = [...this.#offersModel.offers];
 
     this.#pointEditComponent = new EditingFormView({
-      destination: this.#destinations,
+      destinations: this.#destinations,
       offers: this.#offers,
       isNewPoint: true
     });

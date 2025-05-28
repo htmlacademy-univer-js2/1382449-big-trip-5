@@ -143,15 +143,15 @@ export default class EditingFormView extends AbstractStatefulView {
   #datepickerFrom = null;
   #datepickerTo = null;
   #isNewPoint = null;
-  #destination = null;
+  #destinations = null;
   #offers = null;
   _callback = {};
   #offersByType = null;
 
-  constructor({point = BLANK_FORM, destination, offers, isNewPoint}) {
+  constructor({point = BLANK_FORM, destinations, offers, isNewPoint}) {
     super();
     this._state = EditingFormView.parsePointToState(point);
-    this.#destination = destination;
+    this.#destinations = destinations;
     this.#offers = offers;
     this.#isNewPoint = isNewPoint;
     this.#offersByType = this.#offers.find((offer) => offer.type === this._state.type);
@@ -159,8 +159,14 @@ export default class EditingFormView extends AbstractStatefulView {
   }
 
   get template() {
-    return createEditFormTemplate(this._state, this.#destination, this.#offers, this.#isNewPoint);
+    return createEditFormTemplate(this._state, this.#destinations, this.#offers, this.#isNewPoint);
   }
+
+  reset = (point) => {
+    this.updateElement(
+      EditingFormView.parsePointToState(point),
+    );
+  };
 
   removeElement = () => {
     super.removeElement();
@@ -181,15 +187,9 @@ export default class EditingFormView extends AbstractStatefulView {
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#previewClickHandler);
   };
 
-  #previewClickHandler = (evt) => {
-    evt.preventDefault();
-    this._callback.previewClick();
-  };
-
-  reset = (point) => {
-    this.updateElement(
-      EditingFormView.parsePointToState(point),
-    );
+  setResetClickHandler = (callback) => {
+    this._callback.resetClick = callback;
+    this.element.querySelector('.event__reset-btn').addEventListener('click', this.#formResetClickHandler);
   };
 
   setFormSubmitHandler = (callback) => {
@@ -216,9 +216,14 @@ export default class EditingFormView extends AbstractStatefulView {
     });
   };
 
+  #previewClickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.previewClick();
+  };
+
   #destinationInputHandler = (evt) => {
     evt.preventDefault();
-    const destination = this.#destination.find((dest) => dest.name === evt.target.value);
+    const destination = this.#destinations.find((dest) => dest.name === evt.target.value);
     this.updateElement({
       destination: destination.id,
     });
@@ -234,6 +239,7 @@ export default class EditingFormView extends AbstractStatefulView {
   #pointTypeClickHandler = (evt) => {
     evt.preventDefault();
     this._state.offers = [];
+    this.#offersByType = this.#offers.find((offer) => offer.type === evt.target.value);
     this.updateElement({
       type: evt.target.value,
     });
@@ -269,15 +275,10 @@ export default class EditingFormView extends AbstractStatefulView {
     }
   };
 
-  setResetClickHandler = (callback) => {
-    this._callback.resetClick = callback;
-    this.element.querySelector('.event__reset-btn').addEventListener('click', this.#formResetClickHandler);
-  };
-
   #offersClickHandler = (evt) => {
     evt.preventDefault();
-    const offerId = Number(evt.target.id.slice(-1));
-    const offers = this._state.offers.filter((n) => n !== offerId);
+    const offerId = evt.target.id.split('-').slice(2).join('-');
+    const offers = this._state.offers.filter((offer) => offer !== offerId);
     let currentOffers = [...this._state.offers];
     if (offers.length !== this._state.offers.length) {
       currentOffers = offers;
@@ -285,6 +286,7 @@ export default class EditingFormView extends AbstractStatefulView {
     else {
       currentOffers.push(offerId);
     }
+
     this._setState({
       offers: currentOffers,
     });
