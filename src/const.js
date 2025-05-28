@@ -1,7 +1,6 @@
-const SORT_TYPES_OFF = ['event', 'offer'];
-
 const FilterType = {
   EVERYTHING: 'everything',
+  PRESENT: 'present',
   FUTURE: 'future',
   PAST: 'past'
 };
@@ -25,14 +24,6 @@ const UpdateType = {
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
   INIT: 'INIT',
-};
-
-const SortTypeDescription = {
-  [SortType.DAY]: 'Day',
-  [SortType.EVENT]: 'Event',
-  [SortType.TIME]: 'Time',
-  [SortType.PRICE]: 'Price',
-  [SortType.OFFER]: 'Offer',
 };
 
 const Point = {
@@ -59,7 +50,6 @@ const PointDescription = {
   [Point.RESTAURANT]: 'Restaurant'
 };
 
-
 const ApiServiceResponse = {
   GET: 'GET',
   PUT: 'PUT',
@@ -67,4 +57,4 @@ const ApiServiceResponse = {
   DELETE: 'DELETE',
 };
 
-export {SORT_TYPES_OFF, FilterType, SortType, UserAction, UpdateType, SortTypeDescription, Point, PointDescription, ApiServiceResponse};
+export {FilterType, SortType, UserAction, UpdateType, Point, PointDescription, ApiServiceResponse};
