@@ -282,8 +282,7 @@ export default class EditingFormView extends AbstractStatefulView {
     let currentOffers = [...this._state.offers];
     if (offers.length !== this._state.offers.length) {
       currentOffers = offers;
-    }
-    else {
+    } else {
       currentOffers.push(offerId);
     }
 
