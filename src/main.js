@@ -9,8 +9,8 @@ import DestinationsApiService from './api-service/destinations-api.js';
 import OffersApiService from './api-service/offers-api.js';
 import PointsApiService from './api-service/points-api.js';
 
-const AUTHORIZATION = 'Basic HiEvgeniy';
-const END_POINT = 'https://24.objects.htmlacademy.pro/big-trip123';
+const AUTHORIZATION = 'Basic HiEvgeniy!';
+const END_POINT = 'https://24.objects.htmlacademy.pro/big-trip';
 
 const siteHeaderElement = document.querySelector('.trip-main');
 const siteMainElement = document.querySelector('.page-main');
