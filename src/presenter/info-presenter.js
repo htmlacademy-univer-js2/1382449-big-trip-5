@@ -22,12 +22,19 @@ export default class TripInfoPresenter {
     this.#destinations = [...this.#destinationsModel.destinations];
     this.#offers = [...this.#offersModel.offers];
 
+    if (this.#destinations.length === 0 || this.#offers.length === 0) {
+      return;
+    }
+
     this.#tripInfoComponent = new TripInfoView(this.#points, this.#destinations, this.#offers);
 
     render(this.#tripInfoComponent, this.#tripInfoContainer);
   };
 
   destroy = () => {
-    remove(this.#tripInfoComponent);
+    if (this.#tripInfoComponent) {
+      remove(this.#tripInfoComponent);
+      this.#tripInfoComponent = null;
+    }
   };
 }

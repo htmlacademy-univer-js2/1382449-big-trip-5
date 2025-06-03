@@ -1,6 +1,8 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { humanizePointDueDate } from '../utils/point-date.js';
 
+const ROUTE_WITHOUT_SPLIT_LIMIT = 3;
+
 const renderRouteTrip = (points, destinations) => {
   if (points.length === 0) {
     return '';
@@ -12,15 +14,15 @@ const renderRouteTrip = (points, destinations) => {
     }
   }
 
-  if (routeWithoutRepeats.length > 3) {
+  if (routeWithoutRepeats.length > ROUTE_WITHOUT_SPLIT_LIMIT) {
     const startPoint = destinations.find((item) => item.id === routeWithoutRepeats[0]);
     const finishPoint = destinations.find((item) => item.id === routeWithoutRepeats[routeWithoutRepeats.length - 1]);
     return `${startPoint.name} &mdash; ... &mdash; ${finishPoint.name}`;
   }
 
   return routeWithoutRepeats.map((destination) => `${destinations.find((item) => item.id === destination).name}`).join(' &mdash; ');
-
 };
+
 const renderDatesTrip = (points) => {
   if (points.length === 0) {
     return '';
