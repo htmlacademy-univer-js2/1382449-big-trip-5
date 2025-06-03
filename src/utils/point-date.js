@@ -33,10 +33,10 @@ const getDate = (date) => dayjs(date).format(DATE_FORMAT);
 const getTime = (date) => dayjs(date).format(TIME_FORMAT);
 const getDateTime = (date) => dayjs(date).format(DATE_TIME_FORMAT);
 
-const isPastPoint = (dateTo) => dayjs().diff(dateTo, 'minute') > 0;
-const isPresentPoint = (point) => dayjs().isAfter(point.dateFrom) && dayjs().isBefore(point.dateTo);
-const isFuturePoint = (dateFrom) => dayjs().diff(dateFrom, 'minute') <= 0;
-const isFuturePastPoint = (dateFrom, dateTo) => dayjs().diff(dateFrom, 'minute') > 0 && dayjs().diff(dateTo, 'minute') < 0;
+const isPastPoint = (dateTo) => dateTo ? dayjs().diff(dateTo, 'minute') > 0 : false;
+const isFuturePoint = (dateFrom) => dateFrom ? dayjs().isBefore(dateFrom) : false;
+const isPresentPoint = (point) => point.dateFrom && point.dateTo ? (dayjs().isSame(point.dateFrom) || dayjs().isAfter(point.dateFrom)) && (dayjs().isSame(point.dateTo) || dayjs().isBefore(point.dateTo)) : false;
+//const isFuturePastPoint = (dateFrom, dateTo) => dayjs().isSameOrAfter(dateFrom) && dayjs().isSameOrBefore(dateTo);
 
 const sortPointsByPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
 const sortPointsByDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
@@ -53,4 +53,4 @@ const sorting = {
   [SortType.PRICE]: (points) => points.sort(sortPointsByPrice)
 };
 
-export { humanizePointDueDate, duration, getDate, getDateTime, getTime, isPastPoint, isFuturePoint, isFuturePastPoint, isPresentPoint, sorting };
+export { humanizePointDueDate, duration, getDate, getDateTime, getTime, isPastPoint, isFuturePoint, isPresentPoint, sorting };

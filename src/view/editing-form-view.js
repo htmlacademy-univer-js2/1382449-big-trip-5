@@ -7,13 +7,13 @@ import 'flatpickr/dist/flatpickr.min.css';
 import he from 'he';
 
 const BLANK_FORM = {
-  basePrice: 100,
-  dateFrom: dayjs(),
-  dateTo: dayjs(),
+  basePrice: 0,
+  dateFrom: null,
+  dateTo: null,
   destination: 1,
   isFavorite: false,
   offers: [],
-  type: Point.TAXI,
+  type: Point.FLIGHT,
 };
 
 const renderPictures = (pictures) => {
@@ -70,10 +70,10 @@ const renderDestinationContainer = (destination) => {
 const createEditingPointDateTemplate = (dateFrom, dateTo, isDisabled) => (
   `<div class="event__field-group  event__field-group--time">
     <label class="visually-hidden" for="event-start-time-1">From</label>
-    <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${getDateTime(dateFrom)}" ${isDisabled ? 'disabled' : ''}>
-    &mdash;
+    <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${dateFrom ? getDateTime(dateFrom) : ''}" ${isDisabled ? 'disabled' : ''}>
+    —
     <label class="visually-hidden" for="event-end-time-1">To</label>
-    <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${getDateTime(dateTo)}" ${isDisabled ? 'disabled' : ''}>
+    <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${dateTo ? getDateTime(dateTo) : ''}" ${isDisabled ? 'disabled' : ''}>
   </div>`
 );
 
@@ -246,33 +246,29 @@ export default class EditingFormView extends AbstractStatefulView {
   };
 
   #setDatepickerFrom = () => {
-    if (this._state.dateFrom) {
-      this.#datepickerFrom = flatpickr(
-        this.element.querySelector('#event-start-time-1'),
-        {
-          enableTime: true,
-          dateFormat: 'd/m/y H:i',
-          defaultDate: this._state.dateFrom,
-          maxDate: this._state.dateTo,
-          onChange: this.#dateFromChangeHadler,
-        },
-      );
-    }
+    this.#datepickerFrom = flatpickr(
+      this.element.querySelector('#event-start-time-1'),
+      {
+        enableTime: true,
+        dateFormat: 'd/m/y H:i',
+        defaultDate: this._state.dateFrom || null,
+        maxDate: this._state.dateTo,
+        onChange: this.#dateFromChangeHadler,
+      },
+    );
   };
 
   #setDatepickerTo = () => {
-    if (this._state.dateTo) {
-      this.#datepickerTo = flatpickr(
-        this.element.querySelector('#event-end-time-1'),
-        {
-          enableTime: true,
-          dateFormat: 'd/m/y H:i',
-          defaultDate: this._state.dateTo,
-          minDate: this._state.dateFrom,
-          onChange: this.#dateToChangeHadler,
-        },
-      );
-    }
+    this.#datepickerTo = flatpickr(
+      this.element.querySelector('#event-end-time-1'),
+      {
+        enableTime: true,
+        dateFormat: 'd/m/y H:i',
+        defaultDate: this._state.dateTo || null,
+        minDate: this._state.dateFrom,
+        onChange: this.#dateToChangeHadler,
+      },
+    );
   };
 
   #offersClickHandler = (evt) => {
@@ -321,9 +317,10 @@ export default class EditingFormView extends AbstractStatefulView {
     this.setResetClickHandler(this._callback.resetClick);
   };
 
-  static parsePointToState = (point) => ({...point,
-    dateTo: dayjs(point.dateTo).toDate(),
-    dateFrom: dayjs(point.dateFrom).toDate(),
+  static parsePointToState = (point) => ({
+    ...point,
+    dateFrom: point.dateFrom ? dayjs(point.dateFrom).toDate() : null,
+    dateTo: point.dateTo ? dayjs(point.dateTo).toDate() : null,
     isDisabled: false,
     isSaving: false,
     isDeleting: false,
